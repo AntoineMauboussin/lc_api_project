@@ -1,13 +1,18 @@
 window.addEventListener("DOMContentLoaded", e => {
     
+    //place la carte sur paris
     let map = L.map('map').setView([48.8560, 2.3404], 13);
     let itinerary = []
+    let input = document.querySelector(".coordinates")
+    input.value = ""
     
+    //charge la carte OpenStreetMap
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
+    //ajout d'un icone personnalisé de vélo
     let bikeIcon = L.icon({
         iconUrl: 'marker.png',
         shadowUrl: '',
@@ -20,6 +25,7 @@ window.addEventListener("DOMContentLoaded", e => {
     });
     var marker = L.marker([2.33, 48.8]).addTo(map);
 
+    //GET sur l'api de velib de Paris
     fetch("https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&q=&facet=name&facet=is_installed&facet=is_renting&facet=is_returning&facet=nom_arrondissement_communes&rows=100", {
         method: 'GET'
     })
@@ -29,8 +35,8 @@ window.addEventListener("DOMContentLoaded", e => {
         res => {
             data = JSON.parse(res)
             
+            //ajout des marqueurs pour chaque station et d'un popup associé
             data.records.forEach(el => {
-                console.log(el)
                 L.marker([el.geometry.coordinates[1],el.geometry.coordinates[0]],{icon: bikeIcon}).addTo(map).bindPopup("<b>"+el.fields.name+"</b><br>Nombre de vélos disponibles : "
                 +el.fields.numbikesavailable+"<br>Nombre de places disponibles : "+el.fields.numdocksavailable)
             });
@@ -41,6 +47,7 @@ window.addEventListener("DOMContentLoaded", e => {
         }
     )
 
+    //ajout d'un point d'itinéraire au clic
     function onMapClick(e) {
         L.marker(e.latlng).addTo(map);
     
@@ -52,7 +59,7 @@ window.addEventListener("DOMContentLoaded", e => {
             ]).addTo(map);
         }
         itinerary.push(e.latlng)
-        console.log(itinerary)
+        input.value = JSON.stringify(itinerary)
     }
     
     map.on('click', onMapClick);

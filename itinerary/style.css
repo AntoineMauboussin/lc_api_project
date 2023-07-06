@@ -2,3 +2,37 @@
     height: 580px; 
     width: 70%;
 }
+
+.itinerary-container{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    max-width: 100px;
+    align-items: center;
+    padding: 0 10px;
+    border: 2px solid black;
+}
+
+.itinerary-container img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.content-container{
+    display: flex;
+    column-gap: 20px;
+}
+
+h1{
+    font-size: 40px;
+}
+
+.cta{
+    padding: 10px 20px;
+    border: 2px solid black;
+    display: block;
+    width: fit-content;
+    margin-top: 20px;
+    text-decoration: none;
+    color: black;
+}
