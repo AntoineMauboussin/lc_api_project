@@ -36,5 +36,6 @@
     ?>
     </div>
     <a class='cta' href='./itinerary.php'>Nouvel itinéraire</a>
+    <a class='cta' href='./station_list.php'>Liste des stations</a>
 </body>
 </html>

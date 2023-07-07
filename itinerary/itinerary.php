@@ -15,9 +15,9 @@
     crossorigin=""></script>
 </head>
 <body>
-    Hello
+    <a class='cta' href='./index.php'>Retour</a>
     <div id="map"></div>
-    <form method="POST" action="./dashboard.php">
+    <form method="POST" action="./index.php">
         <input name='coordinates' class='coordinates' type='text' hidden required/>
         <label for='title'>Nom de l'itinéraire :</label>
         <input name='title' type='text'required/>
