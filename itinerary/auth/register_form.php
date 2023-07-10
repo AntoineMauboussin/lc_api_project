@@ -45,7 +45,7 @@ if (isset($_SESSION["username"])) {
                 passwordConfirmation: passwordConfirmation
             };
 
-            fetch('../../../auth_api/register.php', {
+            fetch('../../auth_api/register.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

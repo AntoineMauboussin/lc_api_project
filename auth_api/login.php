@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-$pdo = require __DIR__ . "/database.php";
+require_once './db.php';
+
+$pdo = new PDO('sqlite:' . dirname(__FILE__) . '/database.sqlite');
 
 require __DIR__ . '../../vendor/autoload.php';
 
