@@ -47,7 +47,7 @@ if (isset($_SESSION["username"])) {
             })
                 .then(response => response.json())
                 .then(result => {
-                    if (result.statut === "Succès") {
+                    if (result.statut === "Succes") {
                         console.log("Connexion réussie.");
                     } else {
                         console.error("Erreur lors de la connexion:", result.message);

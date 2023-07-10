@@ -1,5 +1,6 @@
 <?php
-$pdo = require __DIR__ . "/database.php";
+require_once './db.php';
+$pdo = new PDO('sqlite:' . dirname(__FILE__) . '/database.sqlite');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $requestBody = file_get_contents('php://input');

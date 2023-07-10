@@ -1,13 +1,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["token"])) {
-    header('Location: /itinerary/auth/login_form.php');
-    exit();
-}
 
-require_once './token_verifier.php';
-// fonction token verifier, on recupère en back le token, on utilise la clé secrete, si on peut accéder a l'identifiant c'est good si non c'est pas good
 ?>
 <!DOCTYPE html>
 <html lang="en">
