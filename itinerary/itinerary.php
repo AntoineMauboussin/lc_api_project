@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if(isset($_SESSION['token'])){
+    $token = $_SESSION['token'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +25,10 @@
 <body>
     <a class='cta' href='./index.php'>Retour</a>
     <div id="map"></div>
-    <form method="POST" action="./index.php">
+    <form method="POST" class='itinerary-form' action="./index.php">
         <input name='coordinates' class='coordinates' type='text' hidden required/>
+        <input class='token' hidden value="<?php echo($token) ?>">
+        <input class='username' hidden name='username'>
         <label for='title'>Nom de l'itinéraire :</label>
         <input name='title' type='text'required/>
         <button>Enregistrer l'itinéraire</button>

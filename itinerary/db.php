@@ -7,7 +7,8 @@ try{
     $pdo->query("CREATE TABLE IF NOT EXISTS itineraries ( 
         id            INTEGER         PRIMARY KEY AUTOINCREMENT,
         coordinates         TEXT,
-        title         TEXT
+        title         TEXT,
+        username        TEXT
     );");
 } catch(Exception $e) {
     echo "Impossible d'accéder à la base de données SQLite : ".$e->getMessage();

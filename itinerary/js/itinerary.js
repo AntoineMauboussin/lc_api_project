@@ -63,4 +63,30 @@ window.addEventListener("DOMContentLoaded", e => {
     }
     
     map.on('click', onMapClick);
+
+
+    document.querySelector(".itinerary-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        //Vérification du jeton
+
+        let token = document.querySelector(".token").value
+        fetch('../auth_api/verify.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({jeton : token})
+        })
+        .then(response => response.json())
+        .then(result => {
+                if(result.statut === "Succès"){
+                    document.querySelector(".username").value = result.utilisateur.identifiant
+                    event.target.submit()
+                }
+        })
+        .catch(error => {
+            console.error("Erreur lors de la requête:", error);
+        });
+    })
 });
