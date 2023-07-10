@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if(isset($_SESSION['token'])){
+    $token = $_SESSION['token'];
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,5 +20,6 @@
 <body>
     <a class='cta' href='./index.php'>Retour</a>
     <div class="list"></div>
+    <input class='token' hidden value="<?php echo($token) ?>">
 </body>
 </html>

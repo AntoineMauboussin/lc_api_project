@@ -19,4 +19,22 @@ window.addEventListener("DOMContentLoaded", e => {
             console.log(e)
         }
     )
+
+    //Vérification du jeton
+
+    let token = document.querySelector(".token").value
+    fetch('../auth_api/verify.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({jeton : token})
+    })
+    .then(response => response.json())
+    .then(result => {
+            console.log(result);
+    })
+    .catch(error => {
+        console.error("Erreur lors de la requête:", error);
+    });
 });

@@ -38,7 +38,7 @@ if (isset($_SESSION["username"])) {
                 password: password
             };
 
-            fetch('../../../auth_api/login.php', {
+            fetch('../../auth_api/login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
