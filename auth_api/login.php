@@ -3,6 +3,10 @@ session_start();
 
 $pdo = require __DIR__ . "/database.php";
 
+require __DIR__ . '../../vendor/autoload.php';
+
+use \Firebase\JWT\JWT;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $requestBody = file_get_contents('php://input');
 
@@ -36,13 +40,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['hashedPassword'])) {
-            $token = bin2hex(random_bytes(16));
+
+            $secret_Key = 'secret_key';
+            $request_data = [
+                'userName' => $username, // User name
+            ];
+
+            $token = JWT::encode(
+                $request_data,
+                $secret_Key,
+                'HS512'
+            );
 
             $_SESSION['token'] = $token;
-            $_SESSION['username'] = $username;
 
             http_response_code(200);
-            echo json_encode(array("statut" => "Succès", "message" => "Connexion réussie", "jeton" => $token));
+            echo json_encode(array("statut" => "Succes", "message" => "Connexion reussie", "jeton" => $token));
             exit();
         } else {
             http_response_code(401);

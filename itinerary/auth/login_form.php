@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (isset($_SESSION["username"])) {
+    header('Location: ../index.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +38,7 @@
                 password: password
             };
 
-            fetch('/auth_api/login.php', {
+            fetch('../../../auth_api/login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
