@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['token'] = $token;
 
             http_response_code(200);
-            echo json_encode(array("statut" => "Succes", "message" => "Connexion reussie", "jeton" => $token));
+            echo json_encode(array("statut" => "Succes", "message" => "Connexion réussie", "jeton" => $token));
             exit();
         } else {
             http_response_code(401);

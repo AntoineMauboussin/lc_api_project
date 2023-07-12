@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if (isset($_SESSION["username"])) {
     header('Location: ../index.php');
@@ -12,23 +12,29 @@ if (isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <h1>Formulaire d'inscription</h1>
-    <form id="registrationForm">
-        <label for="username">Identifiant</label>
-        <input type="text" id="username" name="username" id="username" required maxlength="20">
+    <?php
+    include('../navbar.php');
+    ?>
+    <section>
+        <h1>Formulaire d'inscription</h1>
+        <form id="registrationForm" class="auth-form">
+            <label for="username">Identifiant</label>
+            <input type="text" id="username" name="username" id="username" required maxlength="20">
 
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" id="password" required>
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" id="password" required>
 
 
-        <label for="password-confirm">Confirmer</label>
-        <input type="password" id="password-confirm" name="password-confirm" id="password-confirm" required>
+            <label for="password-confirm">Confirmer</label>
+            <input type="password" id="password-confirm" name="password-confirm" id="password-confirm" required>
 
-        <input type="submit" value="S'inscrire">
-    </form>
+            <input class="button" type="submit" value="S'inscrire">
+        </form>
+    </section>
 
     <script>
         document.getElementById("registrationForm").addEventListener("submit", function (event) {

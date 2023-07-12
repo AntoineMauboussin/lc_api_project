@@ -1,22 +1,25 @@
 <?php
+$token = null;
 
-$loggedIn = isset($_SESSION['token']);
+if(isset($_SESSION['token'])){
+    $token = $_SESSION['token'];
+};
 
 if (isset($_POST['logout'])) {
     session_destroy();
-    header("Location: logout.php");
+    header("Location: index.php");
     exit();
-}
+};
 ?>
 
 <nav>
-    <?php if ($loggedIn): ?>
-        <form method="post" action="">
-            <input type="hidden" name="logout" value="true">
-            <button type="submit">Déconnexion</button>
+    <?php if ($token): ?>
+        <form id="logoutform" method="post" action="">
+            <input id="logout" type="hidden" name="logout" value="true">
+            <button class="button" type="submit">Déconnexion</button>
         </form>
     <?php else: ?>
-        <a href="#">Se connecter</a>
-        <a href="#">S'inscrire</a>
+        <a href="/itinerary/auth/login_form.php">Se connecter</a>
+        <a href="/itinerary/auth/register_form.php">S'inscrire</a>
     <?php endif; ?>
 </nav>

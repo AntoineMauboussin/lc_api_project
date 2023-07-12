@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         http_response_code(200);
         echo json_encode(array("statut" => "Succès", "message" => "Utilisateur enregistré"));
+        header('Location: ../itinerary/index.php');
         exit();
     } catch (PDOException $e) {
         if ($e->errorInfo[1] === 1062) {
