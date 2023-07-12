@@ -1,10 +1,13 @@
 <?php
 
+$token = null;
 session_start();
-if (!isset($_SESSION["token"])) {
-    header('Location: ./auth/login_form.php');
-    exit();
+
+if (isset($_SESSION["token"])) {
+    $token = $_SESSION["token"];
 }
+;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,26 +39,31 @@ if (!isset($_SESSION["token"])) {
         );
     }
 
-    include('navbar.php')
-    ?>
-    <h1>Dashboard</h1>
-    <div class='content-container'>
-        <?php
-        list($headersB64, $payloadB64, $sig) = explode('.', $_SESSION["token"]);
-        $decoded = json_decode(base64_decode($payloadB64), true);
-        $stmt = $pdo->prepare("SELECT * FROM itineraries WHERE username = '".$decoded["userName"]."'");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        foreach ($result as $itinerary) {
-            $html = "<div class='itinerary-container'>
-            <img src='map.png' /><p>" . $itinerary["title"] . "</p>
-            </div>";
-            echo $html;
-        }
+    include('navbar.php');
         ?>
-    </div>
-    <a class='cta' href='./itinerary.php'>Nouvel itinéraire</a>
-    <a class='cta' href='./station_list.php'>Liste des stations</a>
+
+    <section>
+        <h1>Dashboard</h1>
+        <div class='content-container'>
+            <?php
+            if ($token) {
+                list($headersB64, $payloadB64, $sig) = explode('.', $_SESSION["token"]);
+                $decoded = json_decode(base64_decode($payloadB64), true);
+                $stmt = $pdo->prepare("SELECT * FROM itineraries WHERE username = '" . $decoded["userName"] . "'");
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                foreach ($result as $itinerary) {
+                    $html = "<div class='itinerary-container'>
+                <img src='map.png' /><p>" . $itinerary["title"] . "</p>
+                </div>";
+                    echo $html;
+                }
+            }
+            ?>
+        </div>
+        <a class='cta' href='./itinerary.php'>Nouvel itinéraire</a>
+        <a class='cta' href='./station_list.php'>Liste des stations</a>
+    </section>
 </body>
 
 </html>

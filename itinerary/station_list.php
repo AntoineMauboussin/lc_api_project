@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['token'])){
+if (isset($_SESSION['token'])) {
     $token = $_SESSION['token'];
 }
 ?>
@@ -9,6 +9,7 @@ if(isset($_SESSION['token'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,9 +18,16 @@ if(isset($_SESSION['token'])){
     <link rel="stylesheet" href="style.css">
     <script src="js/station_list.js" defer></script>
 </head>
+
 <body>
-    <a class='cta' href='./index.php'>Retour</a>
-    <div class="list"></div>
-    <input class='token' hidden value="<?php echo($token) ?>">
+    <?php
+    include('navbar.php');
+    ?>
+    <section>
+        <a class='cta' href='./index.php'>Retour</a>
+        <div class="list"></div>
+        <input class='token' hidden value="<?php echo ($token) ?>">
+    </section>
 </body>
+
 </html>
